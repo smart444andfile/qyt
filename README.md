@@ -3,7 +3,7 @@ it's just a watch youtube in terminal thing i wrote it in C it only for my perso
 you can pick to search or paste url if you wanted to
 
 you'll need to install yt-dlp and mpv first but i use on arch so 
-#arch linux
+# arch linux
 sudo pacman -S yt-dlp mpv
 other distro or os i might test it later
 
@@ -14,6 +14,7 @@ gcc main.c -o qyt
 or you can change whatever name you want in output
 
 then run by using
+
 ./qyt
 
 that it enjoy
