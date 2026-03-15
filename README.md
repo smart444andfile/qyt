@@ -5,6 +5,7 @@ you can pick to search or paste url if you wanted to
 you'll need to install yt-dlp and mpv first but i use on arch so 
 # arch linux
 sudo pacman -S yt-dlp mpv
+
 other distro or os i might test it later
 
 don't forget to complie it first
