@@ -53,5 +53,7 @@ int main (){
 		scanf("%s", purl);
 		snprintf(mpv_cmd_url, sizeof(mpv_cmd_url), "mpv '%s' --ytdl",purl);
 		system(mpv_cmd_url);
+	} else {
+		printf("pick only 1 or 2 bro am not that dumb \n");
 	}
 }
