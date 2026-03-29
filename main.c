@@ -15,6 +15,10 @@ int search_video () {
 	int i = 0;
 	FILE *fp = popen(command, "r");
 
+	if (fp == NULL) {
+		printf("yt-dlp not installed yet bro");
+		return 1;
+	}
 	while (fgets(buffer, sizeof(buffer), fp) != NULL){
 		buffer[strcspn(buffer, "\n")] = 0;
 		if (i % 2 == 0) {
@@ -39,6 +43,16 @@ int search_video () {
 	return 0;
 }
 
+int url_pasre (){
+	char purl[2048];
+	char mpv_cmd_url[2048];
+	printf("paste url : ");
+	scanf("%2047s", purl);
+	snprintf(mpv_cmd_url , sizeof(mpv_cmd_url), "mpv '%s' --ytdl" , purl);
+	system(mpv_cmd_url);
+
+	return 0;
+}
 int main (){
 	int sel;
 	printf("do you want to search or paste url (1/2) : ");
@@ -47,12 +61,7 @@ int main (){
 	if (sel == 1){
 		search_video();	
 	} else if (sel == 2){
-		char purl[2048];
-		char mpv_cmd_url[2048];
-		printf("paste url : ");
-		scanf("%s", purl);
-		snprintf(mpv_cmd_url, sizeof(mpv_cmd_url), "mpv '%s' --ytdl",purl);
-		system(mpv_cmd_url);
+		url_pasre();
 	} else {
 		printf("pick only 1 or 2 bro am not that dumb \n");
 	}
