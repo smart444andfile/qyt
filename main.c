@@ -47,7 +47,7 @@ int url_pasre (){
 	char purl[2048];
 	char mpv_cmd_url[2048];
 	printf("paste url : ");
-	scanf("%2047s", purl);
+	fgets(purl, sizeof(purl), stdin);
 	snprintf(mpv_cmd_url , sizeof(mpv_cmd_url), "mpv '%s' --ytdl" , purl);
 	system(mpv_cmd_url);
 
