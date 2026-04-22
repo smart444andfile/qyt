@@ -8,6 +8,9 @@ int search_video () {
 	char buffer[4096];
 	char title[5][256];
 	char id[5][64];
+	memset(title, 0, sizeof(title));
+	memset(id, 0, sizeof(id));
+
 	printf("search : ");
 	fgets(search, sizeof(search), stdin);
 	search[strcspn(search, "\n")] = 0;
@@ -21,19 +24,31 @@ int search_video () {
 	}
 	while (fgets(buffer, sizeof(buffer), fp) != NULL){
 		buffer[strcspn(buffer, "\n")] = 0;
-		if (i % 2 == 0) {
-			strcpy(title[i/2], buffer);
+		if (i % 2 == 0 && i/2 < 5) {
+			strncpy(title[i/2], buffer, sizeof(title[i/2]) - 1);
 		} else {
-			strcpy(id[i/2], buffer);
+			strncpy(id[i/2], buffer, sizeof(id[i/2]) - 1);
 		} i++;
 	}
-	for (int j = 0; j < 5; j++){
+	pclose(fp);
+
+	int real_results = (i / 2);
+	for (int j = 0; j < real_results; j++){
 		printf("%d. %s\n", j+1 , title[j]);
 	}
+
+	if (real_results == 0) return 1;
+
 	printf("what video you want to watch : ");
 	int pick;
-	scanf("%d", &pick);
-	getchar();
+	if (scanf("%d", &pick) != 1){
+		printf("INVALID INPUT BRO!!!");
+		while(getchar() != '\n');
+		return 1;
+	}
+	if (pick < 1 || pick > real_results) {
+		printf("PICK BETWEEN 1 and %d YOU IDIOT\n", real_results);
+	}
 
 	char mpv_cmd[2048];
 	snprintf(mpv_cmd, sizeof(mpv_cmd), "mpv 'https://youtube.com/watch?v=%s' --ytdl", id[pick-1]);
